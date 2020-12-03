@@ -41,6 +41,10 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[1.2.0, )"
+            },
+            "System.Collections.NonGeneric": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [

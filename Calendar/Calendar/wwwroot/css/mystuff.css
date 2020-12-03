@@ -26,6 +26,7 @@
     background-color: #F1F1F1;
 }
 
+
 .bigger{
     font-size: 20pt;
 }
@@ -33,6 +34,11 @@
 .timeheader {
     border-right: 2px solid grey;
     color: #484848;
+}
+
+.addevent{
+    bottom: 0px;
+    text-align: right;
 }
 
 th {

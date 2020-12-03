@@ -1,7 +1,5 @@
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.AssemblyInfoInputs.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.AssemblyInfo.cs
-F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.csproj.CoreCompileInputs.cache
-F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.MvcApplicationPartsAssemblyInfo.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.RazorAssemblyInfo.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.RazorAssemblyInfo.cs
 F:\Workspace\aim-hi\Calendar\Calendar\bin\Debug\netcoreapp3.1\appsettings.Development.json
@@ -30,3 +28,6 @@ F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.dll
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.pdb
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.genruntimeconfig.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddEvent.cshtml.g.cs
+F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.csprojAssemblyReference.cache
+F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.csproj.CoreCompileInputs.cache
+F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.MvcApplicationPartsAssemblyInfo.cache

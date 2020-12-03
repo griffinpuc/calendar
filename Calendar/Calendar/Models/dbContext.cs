@@ -13,6 +13,9 @@ namespace Calendar.Models
 
         public void addEvent(Event newevent)
         {
+
+            MySqlDateTime eventDT = newevent.startHour.ToString("yyyy-MM-dd HH:mm:ss");
+
             using var conn = new MySqlConnection(connectionString);
             try
             {
@@ -37,6 +40,8 @@ namespace Calendar.Models
 
             conn.Close();
         }
+
+        //public List<Event> 
 
     }
 }

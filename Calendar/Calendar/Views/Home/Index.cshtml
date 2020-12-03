@@ -1,17 +1,20 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@using Calendar.Models;
+@model Bundle;
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
     <title>Griffin Calendar!</title>
     <link href="~/css/mystuff.css" rel="stylesheet" />
 
-    <script src="~/js/modal.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://egkoppel.github.io/product-sans/google-fonts.css">
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
 
 </head>
 
@@ -37,27 +40,24 @@
             <tbody>
                 @for (int i = 0; i < 24; i++)
                 {
-                <tr>
-                    <td class="timeheader">@i:00 </td>
-                    @for (int j = 0; j < 7; j++)
-                    {
-                        <td class="hour"></td>
-                    }
-                </tr>
+                    <tr>
+                        <td class="timeheader">@i:00 </td>
+                        @for (int j = 0; j < 7; j++)
+                        {
+                            <td class="hour">
+                                <div class="addevent">
+                                    <form method="post" action="@Url.Action("AddEvent", "Home")">
+                                        <input type="hidden" name="test" value="hi!" />
+                                        <button type="submit" class="btn">+</button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        }
+                    </tr>
                 }
             </tbody>
         </table>
-
-    </div>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal center">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
-        </div>
 
     </div>
 
