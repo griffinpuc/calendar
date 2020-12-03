@@ -12,10 +12,12 @@ namespace Calendar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private dbContext _context;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _context = new dbContext();
         }
 
         public IActionResult Index()
@@ -23,7 +25,7 @@ namespace Calendar.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddEvent()
         {
             return View();
         }

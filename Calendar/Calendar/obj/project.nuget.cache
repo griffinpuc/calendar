@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hVTadXED2i+23qiqb4BZlJKvNFCHTY0N/gb2LVrZ38w3y/dnXNfOtXdws4Il5BY/RGiDejcqZwpT0kfQx4WACA==",
+  "dgSpecHash": "da9i9nSHo/RziAO4N996BHH1Gpjy7KyieQT7QCiFtHJmYIc7zH/Qyjh0A0zu3F8i5Njphkzkb7JsKZnBf8e0Vw==",
   "success": true,
   "projectFilePath": "F:\\Workspace\\aim-hi\\Calendar\\Calendar\\Calendar.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Griffin\\.nuget\\packages\\mysqlconnector\\1.2.0\\mysqlconnector.1.2.0.nupkg.sha512"
+  ],
   "logs": []
 }

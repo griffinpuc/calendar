@@ -1,8 +1,65 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+
+    <title>Griffin Calendar!</title>
+    <link href="~/css/mystuff.css" rel="stylesheet" />
+
+    <script src="~/js/modal.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://egkoppel.github.io/product-sans/google-fonts.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+
+<body id="product-sans">
+
+    <div>
+
+        <h2>Month x to Month x</h2>
+
+        <table class="center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="day">SUN <br /><span class="bigger">10</span></th>
+                    <th class="day">MON <br /><span class="bigger">10</span></th>
+                    <th class="day">TUE <br /><span class="bigger">10</span></th>
+                    <th class="day">WED <br /><span class="bigger">10</span></th>
+                    <th class="day">THU <br /><span class="bigger">10</span></th>
+                    <th class="day">FRI <br /><span class="bigger">10</span></th>
+                    <th class="day">SAT <br /><span class="bigger">10</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < 24; i++)
+                {
+                <tr>
+                    <td class="timeheader">@i:00 </td>
+                    @for (int j = 0; j < 7; j++)
+                    {
+                        <td class="hour"></td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal center">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
