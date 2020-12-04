@@ -9,7 +9,8 @@ namespace Calendar.Models
     public class Bundle
     {
 
-        public List<DateTime> week { get; set; }
+        public Week week { get; set; }
+        public DateTime datetime { get; set; }
 
     }
 }

@@ -17,7 +17,6 @@ F:\Workspace\aim-hi\Calendar\Calendar\bin\Debug\netcoreapp3.1\MySqlConnector.dll
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.TagHelpers.input.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.TagHelpers.output.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.RazorCoreGenerate.cache
-F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.RazorTargetAssemblyInfo.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.RazorTargetAssemblyInfo.cs
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.Views.pdb
@@ -29,5 +28,7 @@ F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.pdb
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.genruntimeconfig.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddEvent.cshtml.g.cs
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.csprojAssemblyReference.cache
+F:\Workspace\aim-hi\Calendar\Calendar\bin\Debug\netcoreapp3.1\RestSharp.dll
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.csproj.CoreCompileInputs.cache
 F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Calendar.MvcApplicationPartsAssemblyInfo.cache
+F:\Workspace\aim-hi\Calendar\Calendar\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs

@@ -6,12 +6,12 @@
 <head>
 
     <title>Griffin Calendar!</title>
-    <link href="~/css/mystuff.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://egkoppel.github.io/product-sans/google-fonts.css">
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/mystuff.css" rel="stylesheet" />
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -22,44 +22,107 @@
 
     <div>
 
-        <h2>Month x to Month x</h2>
+        <div class="center">
 
-        <table class="center">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th class="day">SUN <br /><span class="bigger">10</span></th>
-                    <th class="day">MON <br /><span class="bigger">10</span></th>
-                    <th class="day">TUE <br /><span class="bigger">10</span></th>
-                    <th class="day">WED <br /><span class="bigger">10</span></th>
-                    <th class="day">THU <br /><span class="bigger">10</span></th>
-                    <th class="day">FRI <br /><span class="bigger">10</span></th>
-                    <th class="day">SAT <br /><span class="bigger">10</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < 24; i++)
-                {
-                    <tr>
-                        <td class="timeheader">@i:00 </td>
-                        @for (int j = 0; j < 7; j++)
-                        {
-                            <td class="hour">
-                                <div class="addevent">
-                                    <form method="post" action="@Url.Action("AddEvent", "Home")">
-                                        <input type="hidden" name="test" value="hi!" />
-                                        <button type="submit" class="btn">+</button>
-                                    </form>
+            <br />
 
-                                </div>
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
+            <h1>GRIFFIN CALENDAR</h1>
+
+            <br />
+
+            <div class="row justify-content-center">
+                <div class="col-sm-1">
+                    <form method="post" action="@Url.Action("BackWeek", "Home")">
+                        <input type="hidden" name="datetime" value="@Model.week.daysOfWeek[1].thisDate" />
+                        <button type="submit" class="btn btn-dark">
+                            <svg style="color: white;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-md-2">
+                    <h2>@Model.week.daysOfWeek[0].thisDate.ToString("MMMM") @Model.week.daysOfWeek[0].thisDate.Day - @Model.week.daysOfWeek[6].thisDate.ToString("MMMM") @Model.week.daysOfWeek[6].thisDate.Day</h2>
+                </div>
+
+                <div class="col-sm-1">
+                    <form method="post" action="@Url.Action("ForwardWeek", "Home")">
+                        <input type="hidden" name="datetime" value="@Model.week.daysOfWeek[1].thisDate" />
+                        <button type="submit" class="btn btn-dark">
+                            <svg style="color: white;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
+
+    <br />
+    <br />
+
+    <table class="center">
+        <thead>
+            <tr>
+                <th></th>
+                @foreach (Day day in Model.week.daysOfWeek)
+                {
+                    <th class="day">@day.thisDate.DayOfWeek <br /><span class="bigger">@day.thisDate.Day</span></th>
+                }
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @for (int i = 0; i < 24; i++)
+            {
+                <tr>
+                    <td class="timeheader">@i:00 </td>
+                    @foreach (Day day in Model.week.daysOfWeek)
+                    {
+                        <td class="hour">
+                            @{
+                                if (day.events[i] == null)
+                                {
+                                    <form method="post" action="@Url.Action("AddEvent", "Home")">
+                                        <input type="hidden" name="datetime" value="@day.thisDate" />
+                                        <input type="hidden" name="hour" value="@i" />
+                                        <button type="submit" class="btn">+</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form id="@day.thisDate" method="post" action="@Url.Action("EditEvent", "Home")">
+                                        <div class="eventblock button" onclick="submitForm('@day.thisDate');">
+                                            <div class="innerevent">
+                                                <p>@day.events[i].eventName</p>
+
+                                                <p class="eventdesc">@day.events[i].eventDesc</p>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="thisevent" value="@day.events[i].eventId" />
+
+                                    </form>
+
+                                    <script>
+                                        function submitForm(formid) {
+                                            document.getElementById(formid).submit();
+                                        }
+                                    </script>
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+                
+        </tbody>
+    </table>
 
 </body>
 </html>

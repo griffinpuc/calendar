@@ -1,25 +1,70 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@using Calendar.Models;
+@model Bundle;
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
     <title>Griffin Calendar!</title>
     <link href="~/css/mystuff.css" rel="stylesheet" />
 
-    <script src="~/js/modal.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://egkoppel.github.io/product-sans/google-fonts.css">
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
 </head>
 
-<body>
+<body id="product-sans">
 
     <div class="center">
         <h2>Add New Event:</h2>
+
+        <div class="addform">
+            <form method="post" action="@Url.Action("PublishEvent", "Home")">
+
+                <div class="form-group">
+                    <label for="eventname">Event name:</label>
+                    <input type="text" class="form-control" id="eventname" name="eventname" placeholder="'Trip to Morocco'">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventdesc">Example textarea</label>
+                    <textarea class="form-control" id="eventdesc" name="eventdesc" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventstart">Event start:</label>
+                    <input type="text" class="form-control" id="eventstart"value="@Model.datetime" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label class="sr-only" for="eventend">Event end:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@Model.datetime.Date.ToString("yyy-MM-dd")</div>
+                        </div>
+                        <input type="text" class="form-control" id="eventend" name="eventend" value="@Model.datetime.TimeOfDay">
+                    </div>
+                </div>
+
+                <br />
+                <input type="hidden" name="eventstart" value="@Model.datetime" />
+                <button type="submit" class="btn btn-primary">Add Event</button>
+
+            </form>
+        </div>
+
+
     </div>
+
+
 
 </body>
 
