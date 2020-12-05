@@ -13,14 +13,26 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/mystuff.css" rel="stylesheet" />
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover-hover"]').popover({
+                trigger: 'hover',
+            })
+        })
+    </script>
 
 </head>
 
+
 <body id="product-sans">
 
-    <div>
+
+    <div class="fixed-top">
 
         <div class="center">
 
@@ -42,7 +54,7 @@
                     </form>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <h2>@Model.week.daysOfWeek[0].thisDate.ToString("MMMM") @Model.week.daysOfWeek[0].thisDate.Day - @Model.week.daysOfWeek[6].thisDate.ToString("MMMM") @Model.week.daysOfWeek[6].thisDate.Day</h2>
                 </div>
 
@@ -62,15 +74,22 @@
     </div>
 
     <br />
-    <br />
 
-    <table class="center">
+    <table class="center topspace">
         <thead>
             <tr>
                 <th></th>
                 @foreach (Day day in Model.week.daysOfWeek)
                 {
-                    <th class="day">@day.thisDate.DayOfWeek <br /><span class="bigger">@day.thisDate.Day</span></th>
+                    @if (day.thisDate.Date.Equals(DateTime.Now.Date))
+                    {
+                        <th class="day-curr header">@day.thisDate.DayOfWeek <br /><span class="bigger">@day.thisDate.Day</span></th>
+                    }
+                    else
+                    {
+                        <th class="day header">@day.thisDate.DayOfWeek <br /><span class="bigger">@day.thisDate.Day</span></th>
+                    }
+
                 }
 
             </tr>
@@ -84,43 +103,50 @@
                     <td class="timeheader">@i:00 </td>
                     @foreach (Day day in Model.week.daysOfWeek)
                     {
-                        <td class="hour">
-                            @{
-                                if (day.events[i] == null)
-                                {
-                                    <form method="post" action="@Url.Action("AddEvent", "Home")">
-                                        <input type="hidden" name="datetime" value="@day.thisDate" />
-                                        <input type="hidden" name="hour" value="@i" />
-                                        <button type="submit" class="btn">+</button>
-                                    </form>
-                                }
-                                else
-                                {
+
+                        @if (day.events[i] == null)
+                        {
+                            <td class="hour">
+                                <form method="post" action="@Url.Action("AddEvent", "Home")">
+                                    <input type="hidden" name="datetime" value="@day.thisDate" />
+                                    <input type="hidden" name="hour" value="@i" />
+                                    <button type="submit" class="btn">+</button>
+                                </form>
+                            </td>
+                        }
+                        else
+                        {
+                            @if (day.events[i].startHour.Hour == i)
+                            {
+                                <td class="hour" rowspan="@day.events[i].totalHours">
                                     <form id="@day.thisDate" method="post" action="@Url.Action("EditEvent", "Home")">
-                                        <div class="eventblock button" onclick="submitForm('@day.thisDate');">
+
+                                        <div id="popoverData" class="eventblock button" data-toggle="popover-hover" title="@day.events[i].eventName" data-content="@day.events[i].eventDesc" onclick="submitForm('@day.thisDate');">
                                             <div class="innerevent">
                                                 <p>@day.events[i].eventName</p>
-
-                                                <p class="eventdesc">@day.events[i].eventDesc</p>
                                             </div>
                                         </div>
 
-                                        <input type="hidden" name="thisevent" value="@day.events[i].eventId" />
+
+
+                                        <input type="hidden" name="eventId" value="@day.events[i].eventId" />
 
                                     </form>
 
                                     <script>
                                         function submitForm(formid) {
+                                            console.log(formid);
                                             document.getElementById(formid).submit();
                                         }
                                     </script>
-                                }
+                                </td>
                             }
-                        </td>
+
+                        }
                     }
                 </tr>
             }
-                
+
         </tbody>
     </table>
 

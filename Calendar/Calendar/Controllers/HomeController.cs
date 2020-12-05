@@ -11,6 +11,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Calendar.Controllers
 {
+
+    /*
+     * Class HomeController:
+     * Contains all controllers and logic for website
+     */
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -23,7 +29,7 @@ namespace Calendar.Controllers
         }
 
         /* Main Index */
-        public IActionResult Index(DateTime? datetime)
+        public IActionResult Index(DateTime? datetime, int? message)
         {
             /* If none passed, default to today */
             DateTime date = datetime ?? DateTime.Now;
@@ -35,24 +41,50 @@ namespace Calendar.Controllers
             Bundle bundle = new Bundle()
             {
                 /* Take 7 days from week */
-                week = BuildWeek(sessionId, date)
+                week = BuildWeek(sessionId, date),
+                message = message ?? 0
             };
 
             return View(bundle);
         }
 
-        public IActionResult PublishEvent(string eventname, string eventdesc, DateTime eventstart, DateTime eventend)
+        /* Add Event */
+        public IActionResult AddEvent(DateTime datetime, int hour)
+        {
+
+            /* Load objects for view */
+            Bundle bundle = new Bundle()
+            {
+                datetime = datetime.AddHours(hour),
+                hour = hour
+            };
+
+
+            return View(bundle);
+        }
+
+        /* Publish Event */
+        public IActionResult PublishEvent(string eventname, string eventdesc, DateTime eventstart, int eventhrs)
         {
             /* Configure session id */
             string sessionId = getSessionId();
 
             List<int> takenHours = _context.getTakenHoursDay(sessionId, eventstart);
+            DateTime eventend = eventstart.AddHours(eventhrs-1);
 
+            /* Check if it overlaps another event */
             if(takenHours.Contains(eventstart.Hour) | takenHours.Contains(eventend.Hour))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", new { message = 1 });
             }
 
+            /* Check if it goes into the next day */
+            if(eventstart.Hour+eventhrs > 24)
+            {
+                return RedirectToAction("Index", new { message = 2 });
+            }
+
+            /* If it passes all checks, publish event */
             _context.addEvent(new Event()
             {
                 eventName = eventname,
@@ -66,23 +98,37 @@ namespace Calendar.Controllers
         }
 
         /* Edit Event */
-        public IActionResult EditEvent(int thisevent)
-        {
-            return View();
-        }
-
-        /* Add Event */
-        public IActionResult AddEvent(DateTime datetime, int hour)
+        public IActionResult EditEvent(int eventId)
         {
 
             /* Load objects for view */
             Bundle bundle = new Bundle()
             {
-                datetime = datetime.AddHours(hour)
+                someEvent = _context.getEvent(eventId)
             };
 
-
             return View(bundle);
+        }
+
+        /* Update Event */
+        public IActionResult UpdateEvent(int eventid, string eventname, string eventdesc)
+        {
+
+            Event thisevent = _context.getEvent(eventid);
+            thisevent.eventName = eventname;
+            thisevent.eventDesc = eventdesc;
+
+            _context.updateEvent(thisevent);
+
+            return RedirectToAction("Index", new { datetime = thisevent.startHour });
+        }
+
+        /* Remove Event */
+        public IActionResult RemoveEvent(int eventid)
+        {
+            _context.removeEvent(eventid);
+
+            return RedirectToAction("Index", "Home");
         }
 
 

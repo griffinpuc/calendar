@@ -7,11 +7,19 @@ using System.Globalization;
 
 namespace Calendar.Models
 {
+
+    /*
+     * Class dbContext:
+     * Holds all of database functionality
+     */
+
     public class dbContext
     {
-
+        /* Database connection strings */
         private string connectionString = "server=localhost;user=pluginconnection;password=Fall2020!;database=calendar";
+        private string prodConn = "server=localhost;user=pluginconnection;password=Fall2020!;database=calendar";
 
+        /* Add a new event to the database */
         public void addEvent(Event newevent, string sessionId)
         {
 
@@ -44,6 +52,61 @@ namespace Calendar.Models
             conn.Close();
         }
 
+        /* Remove an entry from the database */
+        public void removeEvent(int eventId)
+        {
+            using var conn = new MySqlConnection(connectionString);
+            try
+            {
+                conn.Open();
+
+                string sql = "DELETE FROM events WHERE events.event_id = @EventId;";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@EventId", eventId);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+        }
+
+        /* Update an event in the database */
+        public void updateEvent(Event newevent)
+        {
+
+            string formattedStart = newevent.startHour.ToString("yyyy-MM-dd H:mm:ss");
+            string formattedEnd = newevent.endHour.ToString("yyyy-MM-dd H:mm:ss");
+
+            using var conn = new MySqlConnection(connectionString);
+            try
+            {
+                conn.Open();
+
+                string sql = "UPDATE events SET events.event_name = @Name, events.event_desc = @Desc WHERE events.event_id = @EventId";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@Name", newevent.eventName);
+                cmd.Parameters.AddWithValue("@Desc", newevent.eventDesc);
+                cmd.Parameters.AddWithValue("@EventId", newevent.eventId);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+        }
+
+        /* Get all events for a given session id and time range */
         public List<Event> getEvents(string sessionId, DateTime fromTime, DateTime toTime)
         {
             List<Event> retval = new List<Event>();
@@ -64,14 +127,59 @@ namespace Calendar.Models
 
                 while (rdr.Read())
                 {
-
-                    retval.Add(new Event()
+                    Event newevent = new Event()
                     {
+                        eventId = (int)rdr["event_id"],
                         eventName = (string)rdr["event_name"],
                         eventDesc = (string)rdr["event_desc"],
                         startHour = (DateTime)rdr["event_start"],
                         endHour = (DateTime)rdr["event_end"]
-                    });
+                    };
+                    
+                    newevent.totalHours = (newevent.endHour.Hour - newevent.startHour.Hour) + 1;
+                    retval.Add(newevent);
+                }
+
+                rdr.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            return retval;
+        }
+
+        /* Get an event given an event it */
+        public Event getEvent(int eventId)
+        {
+            Event retval = new Event();
+
+            using var conn = new MySqlConnection(connectionString);
+            try
+            {
+                conn.Open();
+
+                string sql = "SELECT * FROM events WHERE @eventId = events.event_id;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@eventId", eventId);
+
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+
+                    retval = new Event()
+                    {
+                        eventId = (int)rdr["event_id"],
+                        eventName = (string)rdr["event_name"],
+                        eventDesc = (string)rdr["event_desc"],
+                        startHour = (DateTime)rdr["event_start"],
+                        endHour = (DateTime)rdr["event_end"],
+                    };
+
+                    retval.totalHours = (retval.endHour.Hour - retval.startHour.Hour)+1;
 
                 }
 
@@ -85,6 +193,7 @@ namespace Calendar.Models
             return retval;
         }
 
+        /* Get all taken hours from a day */
         public List<int> getTakenHoursDay(string sessionId, DateTime datetime)
         {
             List<int> retval = new List<int>();

@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace Calendar.Models
 {
+
+    /*
+     * Class Week:
+     * Contains all week construction logic given a date
+     */
+
     public class Week
     {
         /* Every week has days */
@@ -39,21 +45,23 @@ namespace Calendar.Models
                     {
                         /* If there are, add all of them to this days events */
                         var events = weeksEvents.Where(i => i.startHour.Hour == dayStart.Hour && i.startHour.DayOfWeek == day.thisDate.DayOfWeek);
-                        day.events.Add(events.First());
+                        Event someevent = events.First();
 
-                    }
-                    else if (weeksEvents.Any(i => i.endHour.Hour == dayStart.Hour && i.startHour.DayOfWeek == day.thisDate.DayOfWeek))
-                    {
-                        var events = weeksEvents.Where(i => i.endHour.Hour == dayStart.Hour && i.startHour.DayOfWeek == day.thisDate.DayOfWeek);
-                        day.events.Add(events.First());
+                        for (int i = 0; i <= (someevent.endHour.Hour - someevent.startHour.Hour); i++)
+                        {
+                            day.events.Add(someevent);
+                            dayStart = dayStart.AddHours(1);
+                        }
+                        
 
                     }
                     else
                     {
                         day.events.Add(null);
+                        dayStart = dayStart.AddHours(1);
                     }
 
-                    dayStart = dayStart.AddHours(1);
+                    
                 }
 
             }
@@ -82,6 +90,11 @@ namespace Calendar.Models
         }
 
     }
+
+    /*
+     * Class Day:
+     * Contains day params
+     */
 
     public class Day
     {

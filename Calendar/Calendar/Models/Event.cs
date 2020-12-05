@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace Calendar.Models
 {
+
+    /*
+     * Class Event:
+     * This defines what parameters an event may have
+     */
+
     public class Event
     {
 
@@ -13,6 +19,7 @@ namespace Calendar.Models
         public string eventDesc { get; set; }
         public DateTime startHour { get; set; }
         public DateTime endHour { get; set; }
+        public int totalHours { get; set; }
 
     }
 }

@@ -1,0 +1,71 @@
+﻿@using Calendar.Models;
+@model Bundle;
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title>Griffin Calendar!</title>
+    <link href="~/css/mystuff.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://egkoppel.github.io/product-sans/google-fonts.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+</head>
+
+<body id="product-sans">
+
+    <div class="center">
+        <h2>Edit Event:</h2>
+
+        <div class="addform">
+            <form method="post" action="@Url.Action("UpdateEvent", "Home")">
+
+                <div class="form-group">
+                    <label for="eventname">Event name:</label>
+                    <input type="text" class="form-control" id="eventname" name="eventname" value="@Model.someEvent.eventName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventdesc">Event description:</label>
+                    <textarea class="form-control" id="eventdesc" name="eventdesc" rows="3" required>@Model.someEvent.eventDesc</textarea>
+                </div>
+
+
+                <br />
+                <input type="hidden" name="eventid" value="@Model.someEvent.eventId" />
+                <input type="hidden" name="starttime" value="@Model.someEvent.startHour" />
+                <button type="submit" class="btn btn-primary">Edit Event</button>
+
+            </form>
+
+            <form method="post" action="@Url.Action("Index", "Home")">
+                <button type="submit" class="btn btn-secondary">Cancel</button>
+            </form>
+
+            <br />
+            <br />
+
+            <form method="post" action="@Url.Action("RemoveEvent", "Home")">
+                <input type="hidden" name="eventid" value="@Model.someEvent.eventId" />
+                <button type="submit" class="btn btn-danger">Remove Event</button>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+
+</html>

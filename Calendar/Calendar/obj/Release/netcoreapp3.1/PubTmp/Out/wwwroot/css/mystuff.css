@@ -1,0 +1,95 @@
+﻿.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+}
+
+.day {
+    width: 10vw;
+    padding: 15px;
+    background-color: white;
+    border-bottom: 2px solid grey;
+    border-right: 2px solid grey;
+}
+
+.day-curr {
+    width: 10vw;
+    padding: 15px;
+    background-color: lightblue;
+    border-bottom: 2px solid grey;
+    border-right: 2px solid grey;
+}
+
+.hour {
+    width: 10vw;
+    height: 8vh;
+    padding: 15px;
+    background-color: white;
+    border-bottom: 2px solid grey;
+    border-right: 2px solid grey;
+    font-weight: 500;
+}
+
+.hour:hover {
+    background-color: #F1F1F1;
+}
+
+
+.bigger{
+    font-size: 20pt;
+}
+
+.center {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.timeheader {
+    border-right: 2px solid grey;
+    color: #484848;
+}
+
+.eventblock {
+    margin: 10px;
+    text-align: left;
+    color: white;
+    background-color: #457b9d;
+    border-radius: 10px;
+}
+
+.innerevent{
+    padding: 15px;
+}
+
+.eventdesc{
+    font-size: 10pt;
+}
+
+.addform {
+    width: 20%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    font-size: 15pt;
+    color: #484848;
+}
+
+td {
+    font-size: 15pt;
+    color: #484848;
+    transition: 0.3s;
+}
+
+body {
+    font-family: 'Product Sans Regular';
+}
+
+
+@font-face {
+    font-family: 'Product Sans Regular';
+    src: url('Product Sans Regular.ttf') format('truetype');
+}
