@@ -84,6 +84,12 @@ namespace Calendar.Controllers
                 return RedirectToAction("Index", new { message = 2 });
             }
 
+            /* Check if event is negative or zero hours */
+            if (eventhrs < 1)
+            {
+                return RedirectToAction("Index", new { message = 2 });
+            }
+
             /* If it passes all checks, publish event */
             _context.addEvent(new Event()
             {

@@ -16,8 +16,7 @@ namespace Calendar.Models
     public class dbContext
     {
         /* Database connection strings */
-        private string connectionString = "server=localhost;user=pluginconnection;password=Fall2020!;database=calendar";
-        private string prodConn = "server=localhost;user=pluginconnection;password=Fall2020!;database=calendar";
+        private string connectionString = "";
 
         /* Add a new event to the database */
         public void addEvent(Event newevent, string sessionId)
