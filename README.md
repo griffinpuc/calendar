@@ -18,7 +18,8 @@ I have self-hosted this webapp in a subdomain on my home webserver:<br />
 Visit [the live webapp here](https://calendar.terramisha.com/)
 
 ### Building from Source
-Steps here for building from source<br />
-Download<br />
-Publish<br />
-Add to IIS
+Steps here for building from source:<br />
+<br />
+Download Source [Source available here](https://github.com/griffinpuc/calendar/blob/master/SQL%20Models/create.sql)<br />
+Configure MySQL Database [File available here](https://github.com/griffinpuc/calendar/blob/master/SQL%20Models/create.sql)<br />
+Publish to IIS webserver<br />
