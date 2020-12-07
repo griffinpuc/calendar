@@ -17,6 +17,8 @@ This is a basic web-based weekly calendar. Users are assigned a unique GUID, whi
 I have self-hosted this webapp in a subdomain on my home webserver:<br />
 Visit [the live webapp here](https://calendar.terramisha.com/)
 
+You can click on blank hours to schedule events, hover over events to see descriptions, and click events to edit them.
+
 ### Building from Source
 Steps here for building from source:<br />
 <br />
