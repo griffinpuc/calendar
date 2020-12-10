@@ -22,6 +22,6 @@ You can click on blank hours to schedule events, hover over events to see descri
 ### Building from Source
 Steps here for building from source:<br />
 <br />
-Download Source [Source available here](https://github.com/griffinpuc/calendar/blob/master/SQL%20Models/create.sql)<br />
+Download Source [Source available here](https://github.com/griffinpuc/calendar/releases/tag/1.0.0)<br />
 Configure MySQL Database [File available here](https://github.com/griffinpuc/calendar/blob/master/SQL%20Models/create.sql)<br />
 Publish to IIS webserver<br />
